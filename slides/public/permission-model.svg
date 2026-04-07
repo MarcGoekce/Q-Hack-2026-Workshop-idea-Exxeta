@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="380" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="monospace, sans-serif">
   <!-- Background -->
-  <rect width="800" height="380" fill="#0f172a" rx="12"/>
+  <rect width="800" height="380" fill="#000000" rx="12"/>
 
   <!-- Title -->
-  <text x="400" y="35" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="bold">OpenCode Permission Model</text>
-  <text x="400" y="55" text-anchor="middle" fill="#64748b" font-size="12">Layered trust: allow → ask → deny</text>
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">OpenCode Permission Model</text>
+  <text x="400" y="55" text-anchor="middle" fill="#888888" font-size="12">Layered trust: allow → ask → deny</text>
 
   <!-- Layer 3: Outer (most restrictive CI) -->
-  <rect x="40" y="75" width="720" height="265" rx="12" fill="#0f172a" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,4"/>
-  <text x="65" y="97" fill="#ef4444" font-size="11" font-weight="bold">CI / Production (deny destructive, never allow *)</text>
+  <rect x="40" y="75" width="720" height="265" rx="12" fill="#000000" stroke="#555555" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="65" y="97" fill="#aaaaaa" font-size="11" font-weight="bold">CI / Production (deny destructive, never allow *)</text>
 
   <!-- Layer 2: Team project -->
-  <rect x="80" y="110" width="640" height="210" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
-  <text x="105" y="130" fill="#f59e0b" font-size="11" font-weight="bold">Team Project opencode.json (bash: git allow, rm deny; edit: scoped; .env: deny)</text>
+  <rect x="80" y="110" width="640" height="210" rx="10" fill="#000000" stroke="#888888" stroke-width="2"/>
+  <text x="105" y="130" fill="#cccccc" font-size="11" font-weight="bold">Team Project opencode.json (bash: git allow, rm deny; edit: scoped; .env: deny)</text>
 
   <!-- Layer 1: Developer local -->
-  <rect x="120" y="148" width="560" height="155" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
-  <text x="145" y="168" fill="#10b981" font-size="11" font-weight="bold">Developer Local (~/.config/opencode/opencode.json)</text>
+  <rect x="120" y="148" width="560" height="155" rx="8" fill="#000000" stroke="#aaaaaa" stroke-width="2"/>
+  <text x="145" y="168" fill="#dddddd" font-size="11" font-weight="bold">Developer Local (~/.config/opencode/opencode.json)</text>
 
   <!-- Layer 0: Agent override -->
-  <rect x="160" y="186" width="480" height="100" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-  <text x="185" y="206" fill="#93c5fd" font-size="11" font-weight="bold">Per-Agent Permission Override (.opencode/agents/review.md)</text>
+  <rect x="160" y="186" width="480" height="100" rx="6" fill="#111111" stroke="#ffffff" stroke-width="2"/>
+  <text x="185" y="206" fill="#cccccc" font-size="11" font-weight="bold">Per-Agent Permission Override (.opencode/agents/review.md)</text>
 
   <!-- Permission boxes inside -->
   <!-- allow -->
-  <rect x="185" y="215" width="120" height="50" rx="5" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
-  <text x="245" y="237" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="bold">allow</text>
-  <text x="245" y="253" text-anchor="middle" fill="#64748b" font-size="10">run immediately</text>
+  <rect x="185" y="215" width="120" height="50" rx="5" fill="#1a1a1a" stroke="#aaaaaa" stroke-width="1.5"/>
+  <text x="245" y="237" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">allow</text>
+  <text x="245" y="253" text-anchor="middle" fill="#888888" font-size="10">run immediately</text>
 
   <!-- ask -->
-  <rect x="330" y="215" width="120" height="50" rx="5" fill="#1c1917" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="390" y="237" text-anchor="middle" fill="#fcd34d" font-size="12" font-weight="bold">ask</text>
-  <text x="390" y="253" text-anchor="middle" fill="#64748b" font-size="10">once/always/reject</text>
+  <rect x="330" y="215" width="120" height="50" rx="5" fill="#1a1a1a" stroke="#888888" stroke-width="1.5"/>
+  <text x="390" y="237" text-anchor="middle" fill="#cccccc" font-size="12" font-weight="bold">ask</text>
+  <text x="390" y="253" text-anchor="middle" fill="#888888" font-size="10">once/always/reject</text>
 
   <!-- deny -->
-  <rect x="475" y="215" width="120" height="50" rx="5" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
-  <text x="535" y="237" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="bold">deny</text>
-  <text x="535" y="253" text-anchor="middle" fill="#64748b" font-size="10">blocked entirely</text>
+  <rect x="475" y="215" width="120" height="50" rx="5" fill="#1a1a1a" stroke="#555555" stroke-width="1.5"/>
+  <text x="535" y="237" text-anchor="middle" fill="#aaaaaa" font-size="12" font-weight="bold">deny</text>
+  <text x="535" y="253" text-anchor="middle" fill="#888888" font-size="10">blocked entirely</text>
 
   <!-- Default note -->
-  <text x="400" y="305" text-anchor="middle" fill="#64748b" font-size="10">Defaults: most tools allow • .env files deny • doom_loop → ask • external_directory → ask</text>
+  <text x="400" y="305" text-anchor="middle" fill="#888888" font-size="10">Defaults: most tools allow • .env files deny • doom_loop → ask • external_directory → ask</text>
 
   <!-- Last-match-wins note -->
-  <rect x="200" y="320" width="400" height="24" rx="4" fill="#0f172a" stroke="#3b82f6" stroke-width="1"/>
-  <text x="400" y="336" text-anchor="middle" fill="#93c5fd" font-size="10">Rules: last-match-wins • put "*" first, specifics after</text>
+  <rect x="200" y="320" width="400" height="24" rx="4" fill="#000000" stroke="#888888" stroke-width="1"/>
+  <text x="400" y="336" text-anchor="middle" fill="#cccccc" font-size="10">Rules: last-match-wins • put "*" first, specifics after</text>
 </svg>

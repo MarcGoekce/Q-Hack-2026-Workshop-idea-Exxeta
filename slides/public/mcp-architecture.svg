@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="380" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="monospace, sans-serif">
   <!-- Background -->
-  <rect width="800" height="380" fill="#0f172a" rx="12"/>
+  <rect width="800" height="380" fill="#000000" rx="12"/>
 
   <!-- Title -->
-  <text x="400" y="35" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="bold">MCP Architecture</text>
-  <text x="400" y="55" text-anchor="middle" fill="#64748b" font-size="12">OpenCode Client ↔ MCP Servers</text>
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">MCP Architecture</text>
+  <text x="400" y="55" text-anchor="middle" fill="#888888" font-size="12">OpenCode Client ↔ MCP Servers</text>
 
   <!-- OpenCode Core box -->
-  <rect x="270" y="80" width="260" height="100" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-  <text x="400" y="108" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="bold">OpenCode Core</text>
-  <text x="400" y="128" text-anchor="middle" fill="#64748b" font-size="11">Tool Router</text>
-  <text x="400" y="145" text-anchor="middle" fill="#64748b" font-size="11">Permission Layer</text>
-  <text x="400" y="162" text-anchor="middle" fill="#64748b" font-size="11">Context Manager</text>
+  <rect x="270" y="80" width="260" height="100" rx="8" fill="#111111" stroke="#ffffff" stroke-width="2"/>
+  <text x="400" y="108" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">OpenCode Core</text>
+  <text x="400" y="128" text-anchor="middle" fill="#888888" font-size="11">Tool Router</text>
+  <text x="400" y="145" text-anchor="middle" fill="#888888" font-size="11">Permission Layer</text>
+  <text x="400" y="162" text-anchor="middle" fill="#888888" font-size="11">Context Manager</text>
 
   <!-- LLM Provider box (left) -->
-  <rect x="60" y="95" width="150" height="70" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
-  <text x="135" y="120" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="bold">LLM Provider</text>
-  <text x="135" y="140" text-anchor="middle" fill="#64748b" font-size="10">Anthropic / OpenAI</text>
-  <text x="135" y="155" text-anchor="middle" fill="#64748b" font-size="10">Bedrock / local</text>
+  <rect x="60" y="95" width="150" height="70" rx="8" fill="#111111" stroke="#aaaaaa" stroke-width="2"/>
+  <text x="135" y="120" text-anchor="middle" fill="#cccccc" font-size="13" font-weight="bold">LLM Provider</text>
+  <text x="135" y="140" text-anchor="middle" fill="#888888" font-size="10">Anthropic / OpenAI</text>
+  <text x="135" y="155" text-anchor="middle" fill="#888888" font-size="10">Bedrock / local</text>
 
   <!-- Arrow LLM <-> Core -->
-  <line x1="210" y1="130" x2="270" y2="130" stroke="#8b5cf6" stroke-width="2" marker-end="url(#a-purple)"/>
-  <line x1="270" y1="120" x2="210" y2="120" stroke="#8b5cf6" stroke-width="2" marker-end="url(#a-purple-rev)"/>
-  <text x="240" y="112" text-anchor="middle" fill="#8b5cf6" font-size="9">tool calls</text>
-  <text x="240" y="138" text-anchor="middle" fill="#8b5cf6" font-size="9">results</text>
+  <line x1="210" y1="130" x2="270" y2="130" stroke="#aaaaaa" stroke-width="2" marker-end="url(#a-gray)"/>
+  <line x1="270" y1="120" x2="210" y2="120" stroke="#aaaaaa" stroke-width="2" marker-end="url(#a-gray-rev)"/>
+  <text x="240" y="112" text-anchor="middle" fill="#aaaaaa" font-size="9">tool calls</text>
+  <text x="240" y="138" text-anchor="middle" fill="#aaaaaa" font-size="9">results</text>
 
   <!-- MCP Local box -->
-  <rect x="60" y="230" width="150" height="70" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
-  <text x="135" y="255" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="bold">Local MCP</text>
-  <text x="135" y="273" text-anchor="middle" fill="#64748b" font-size="10">subprocess (stdio)</text>
-  <text x="135" y="289" text-anchor="middle" fill="#64748b" font-size="10">filesystem, DB, CLI</text>
+  <rect x="60" y="230" width="150" height="70" rx="8" fill="#111111" stroke="#aaaaaa" stroke-width="2"/>
+  <text x="135" y="255" text-anchor="middle" fill="#cccccc" font-size="13" font-weight="bold">Local MCP</text>
+  <text x="135" y="273" text-anchor="middle" fill="#888888" font-size="10">subprocess (stdio)</text>
+  <text x="135" y="289" text-anchor="middle" fill="#888888" font-size="10">filesystem, DB, CLI</text>
 
   <!-- Arrow Core -> Local MCP -->
-  <line x1="270" y1="165" x2="210" y2="245" stroke="#10b981" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#a-green)"/>
-  <text x="215" y="210" text-anchor="middle" fill="#10b981" font-size="9">stdio</text>
+  <line x1="270" y1="165" x2="210" y2="245" stroke="#888888" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#a-mid)"/>
+  <text x="215" y="210" text-anchor="middle" fill="#888888" font-size="9">stdio</text>
 
   <!-- MCP Remote box -->
-  <rect x="590" y="230" width="150" height="70" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
-  <text x="665" y="255" text-anchor="middle" fill="#fcd34d" font-size="13" font-weight="bold">Remote MCP</text>
-  <text x="665" y="273" text-anchor="middle" fill="#64748b" font-size="10">HTTPS server</text>
-  <text x="665" y="289" text-anchor="middle" fill="#64748b" font-size="10">Sentry, Jira, GitHub</text>
+  <rect x="590" y="230" width="150" height="70" rx="8" fill="#111111" stroke="#666666" stroke-width="2"/>
+  <text x="665" y="255" text-anchor="middle" fill="#cccccc" font-size="13" font-weight="bold">Remote MCP</text>
+  <text x="665" y="273" text-anchor="middle" fill="#888888" font-size="10">HTTPS server</text>
+  <text x="665" y="289" text-anchor="middle" fill="#888888" font-size="10">Sentry, Jira, GitHub</text>
 
   <!-- Arrow Core -> Remote MCP -->
-  <line x1="530" y1="165" x2="590" y2="245" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#a-yellow)"/>
-  <text x="585" y="210" text-anchor="middle" fill="#f59e0b" font-size="9">HTTPS</text>
+  <line x1="530" y1="165" x2="590" y2="245" stroke="#666666" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#a-dark)"/>
+  <text x="585" y="210" text-anchor="middle" fill="#666666" font-size="9">HTTPS</text>
 
   <!-- Built-in Tools box -->
-  <rect x="310" y="230" width="180" height="70" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="400" y="255" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="bold">Built-in Tools</text>
-  <text x="400" y="273" text-anchor="middle" fill="#64748b" font-size="10">bash │ read │ edit │ write</text>
-  <text x="400" y="289" text-anchor="middle" fill="#64748b" font-size="10">glob │ grep │ webfetch</text>
+  <rect x="310" y="230" width="180" height="70" rx="8" fill="#111111" stroke="#aaaaaa" stroke-width="1.5"/>
+  <text x="400" y="255" text-anchor="middle" fill="#cccccc" font-size="13" font-weight="bold">Built-in Tools</text>
+  <text x="400" y="273" text-anchor="middle" fill="#888888" font-size="10">bash │ read │ edit │ write</text>
+  <text x="400" y="289" text-anchor="middle" fill="#888888" font-size="10">glob │ grep │ webfetch</text>
 
   <!-- Arrow Core -> Built-in -->
-  <line x1="400" y1="180" x2="400" y2="230" stroke="#3b82f6" stroke-width="2" marker-end="url(#a-blue)"/>
+  <line x1="400" y1="180" x2="400" y2="230" stroke="#aaaaaa" stroke-width="2" marker-end="url(#a-gray2)"/>
 
   <!-- Config label -->
-  <rect x="305" y="330" width="190" height="30" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
-  <text x="400" y="350" text-anchor="middle" fill="#94a3b8" font-size="11">Config: opencode.json + AGENTS.md</text>
+  <rect x="305" y="330" width="190" height="30" rx="4" fill="#000000" stroke="#2a2a2a" stroke-width="1"/>
+  <text x="400" y="350" text-anchor="middle" fill="#888888" font-size="11">Config: opencode.json + AGENTS.md</text>
 
   <!-- Arrow markers -->
   <defs>
-    <marker id="a-purple" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="#8b5cf6"/>
+    <marker id="a-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#aaaaaa"/>
     </marker>
-    <marker id="a-purple-rev" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="#8b5cf6"/>
+    <marker id="a-gray-rev" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#aaaaaa"/>
     </marker>
-    <marker id="a-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="#10b981"/>
+    <marker id="a-mid" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#888888"/>
     </marker>
-    <marker id="a-yellow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="#f59e0b"/>
+    <marker id="a-gray2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#aaaaaa"/>
     </marker>
-    <marker id="a-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0,8 3,0 6" fill="#3b82f6"/>
+    <marker id="a-dark" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#666666"/>
     </marker>
   </defs>
 </svg>

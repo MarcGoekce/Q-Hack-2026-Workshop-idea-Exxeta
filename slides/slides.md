@@ -3,22 +3,29 @@ theme: default
 title: Agentic Coding with OpenCode
 info: |
   Workshop: Agentic Coding with OpenCode
-  Q-Summit 2026
+  Q-Summit 2026 · Exxeta AG
 highlighter: shiki
 drawings:
   persist: false
 transition: slide-left
 mdc: true
+css: style.css
+favicon: /exxeta-icon.svg
 ---
+
+<img src="/exxeta-logo-white.svg" alt="Exxeta" class="h-10" />
 
 # Agentic Coding with OpenCode
 
-**Q-Summit 2026**
+## Q-Summit 2026
+### Building software with AI agents that plan, act, and observe
 
-Building software with AI agents that plan, act, and observe
+<div class="title-slide__badge">
+  <span>50-minute workshop</span>
+</div>
 
-<div class="pt-12">
-  <span class="px-2 py-1 rounded text-sm font-mono">50-minute workshop</span>
+<div class="title-slide__mark">
+  <img src="/exxeta-mark.svg" alt="" aria-hidden="true" />
 </div>
 
 <!-- Notes:
@@ -31,13 +38,13 @@ layout: default
 
 # Agenda
 
-| Time | Section |
-|------|---------|
-| 00:00–05:00 | What is Agentic Coding? |
+| Time        | Section                                |
+|-------------|----------------------------------------|
+| 00:00–05:00 | What is Agentic Coding?                |
 | 05:00–15:00 | OpenCode: Architecture & Core Concepts |
-| 15:00–25:00 | MCP Servers & Permissions |
-| 25:00–40:00 | Live Demos (Obsidian Plugin + CLI) |
-| 40:00–50:00 | Patterns, Pitfalls & Q&A |
+| 15:00–25:00 | MCP Servers & Permissions              |
+| 25:00–40:00 | Live Demos (Obsidian Plugin + CLI)     |
+| 40:00–50:00 | Patterns, Pitfalls & Q&A               |
 
 **Goal:** Leave able to run OpenCode on a real project today.
 
@@ -106,8 +113,6 @@ layout: default
 # What Is an Agent?
 
 An AI agent receives a goal, proposes a plan of steps, executes permitted tools, observes results, and iterates — subject to permissions and human oversight.
-
-<br/>
 
 <img src="/agent-loop.svg" class="max-h-[40vh] w-auto object-contain mx-auto" />
 
@@ -208,7 +213,7 @@ User Message
      │
      ▼
 ┌─────────────┐    tool call     ┌─────────────┐
-│  LLM Plan   │ ──────────────► │ Tool Execute│
+│  LLM Plan   │ ──────────────►  │ Tool Execute│
 │  (think)    │                  │ (act)       │
 └─────────────┘ ◄──────────────  └─────────────┘
      │           tool result           │
@@ -803,10 +808,22 @@ Open it up to the room. The best discussion usually comes from question 2 — pe
 -->
 
 ---
-layout: center
+layout: default
+class: thankyou-slide
 ---
 
+<div class="thankyou-slide__logo">
+  <img src="/exxeta-logo-white.svg" alt="Exxeta" class="h-10" />
+</div>
+
 # Thank You
+
+## Q-Summit 2026
+### Building software with AI agents that plan, act, and observe
+
+<div class="title-slide__badge">
+  <span>Let's build with agents</span>
+</div>
 
 **Workshop materials:**
 
@@ -821,9 +838,11 @@ cd workshop-agentic
 **OpenCode:**
 `curl -fsSL https://opencode.ai/install | bash`
 
-<br/>
+<p class="thankyou-slide__cta">Questions, feedback, follow-up: use the Q-Summit Discord channel <strong>#agentic-coding</strong></p>
 
-Questions, feedback, follow-up: use the Q-Summit Discord channel **#agentic-coding**
+<div class="title-slide__mark" aria-hidden="true">
+  <img src="/exxeta-mark.svg" alt="" />
+</div>
 
 <!-- Notes:
 All materials are in the repo. The README has quick-start instructions and links to all docs sources we used today. If you hit issues getting OpenCode running, the Discord is very active and the maintainers respond quickly. Thanks for attending — go build something with it today.

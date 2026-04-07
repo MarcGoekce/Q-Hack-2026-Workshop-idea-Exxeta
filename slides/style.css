@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap");
+
+/* ============================================================
+   Exxeta brand styles for Slidev — Q-Summit 2026
+   Palette:
+     --ex-black   #000000   primary background (title/thank-you)
+     --ex-white   #ffffff   default slide background
+     --ex-grey    #f5f5f5   light surface
+     --ex-mid     #888888   muted text
+     --ex-dark    #111111   dark surface (code blocks, footer)
+     --ex-border  #2a2a2a   dark border
+     --ex-border-light #d4d4d4  light border for white slides
+   ============================================================ */
+
+/* ── Font faces ──────────────────────────────────────────── */
+/* Brandstein local font (newly added). Use the Bold/Display face for headings.
+   If you add a regular/400 file later, add a matching @font-face with font-weight:400. */
+@font-face {
+    font-family: "Brandstein";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/BandeinsStrange-BoldExtendedHalf.otf") format("opentype");
+}
+
+/* Fallback: if a regular Brandstein is not provided, map weight 400 to the same file
+   so approximate styling is preserved. Replace with a proper 400 file when available. */
+@font-face {
+    font-family: "Brandstein";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/BandeinsStrange-BoldExtendedHalf.otf") format("opentype");
+}
+
+:root {
+    --ex-black: #000000;
+    --ex-white: #ffffff;
+    --ex-grey: #f5f5f5;
+    --ex-mid: #888888;
+    --ex-dark: #111111;
+    --ex-dark-surface: #111111;
+    --ex-border: #2a2a2a;
+    --ex-border-light: #d4d4d4;
+    --heading-font: "Brandstein", "Sen", "Montserrat", Arial, sans-serif;
+    --body-font: "Sen", "Montserrat", Arial, sans-serif;
+}
+
+/* Global typography: Brandstein for H1, Sen for the rest. */
+.slidev-layout,
+.slidev-layout p,
+.slidev-layout li,
+.slidev-layout blockquote,
+.slidev-layout td,
+.slidev-layout th {
+    font-family: var(--body-font);
+}
+
+/* Code and preformatted blocks should use a monospace stack, not the Sen body font */
+.slidev-layout code,
+.slidev-layout pre,
+.slidev-layout kbd,
+.slidev-layout tt {
+    font-family: var(--slidev-code-font-family);
+    font-size: var(--slidev-code-font-size);
+    line-height: var(--slidev-code-line-height);
+}
+
+.slidev-layout h1 {
+    font-family: var(--heading-font) !important;
+}
+
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout h4,
+.slidev-layout h5,
+.slidev-layout h6 {
+    font-family: var(--body-font) !important;
+}
+
+/* ── Title slide ─────────────────────────────────────────── */
+.title-slide,
+.slidev-layout:has(.title-slide__badge) {
+    background-color: var(--ex-black);
+    color: var(--ex-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.title-slide img.h-10,
+.slidev-layout:has(.title-slide__badge) img.h-10 {
+    height: 2rem;
+    width: auto;
+    margin-bottom: 1.5rem;
+}
+
+.title-slide h1,
+.slidev-layout:has(.title-slide__badge) h1 {
+    font-family: var(--heading-font);
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ex-white);
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.title-slide h2,
+.slidev-layout:has(.title-slide__badge) h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #aaaaaa;
+    margin: 0.25rem 0;
+}
+
+.title-slide h3,
+.slidev-layout:has(.title-slide__badge) h3 {
+    font-size: 1.05rem;
+    color: var(--ex-mid);
+    margin: 0.6rem 0 1.2rem;
+    max-width: 36rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.title-slide .title-slide__badge,
+.slidev-layout:has(.title-slide__badge) .title-slide__badge {
+    margin-top: 1rem;
+}
+
+.title-slide .title-slide__badge span,
+.slidev-layout:has(.title-slide__badge) .title-slide__badge span {
+    display: inline-block;
+    background-color: var(--ex-white);
+    color: var(--ex-black);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+}
+
+.title-slide .title-slide__mark,
+.slidev-layout:has(.title-slide__badge) .title-slide__mark {
+    position: absolute;
+    right: -3rem;
+    bottom: -3rem;
+    opacity: 0.08;
+    width: 22rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.title-slide .title-slide__mark img,
+.slidev-layout:has(.title-slide__badge) .title-slide__mark img {
+    width: 100%;
+    height: auto;
+}
+
+/* ── Thank-you slide ─────────────────────────────────────── */
+.thankyou-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem 3rem;
+    background-color: var(--ex-black);
+    color: var(--ex-white);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.thankyou-slide__logo {
+    margin-bottom: 1.5rem;
+}
+
+.thankyou-slide__logo img {
+    height: 2rem;
+    width: auto;
+}
+
+.thankyou-slide h1 {
+    font-family: var(--heading-font);
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ex-white) !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.thankyou-slide h2 {
+    margin: 0.2rem 0;
+    color: #aaaaaa;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.thankyou-slide h3,
+.thankyou-slide__lead {
+    margin: 0.6rem 0 1.4rem;
+    max-width: 42rem;
+    color: var(--ex-mid);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.thankyou-slide__meta {
+    color: var(--ex-white);
+    font-size: 1rem;
+    margin: 0.3rem 0;
+}
+
+.thankyou-slide__cta {
+    color: var(--ex-mid);
+    margin-top: 1.2rem;
+}
+
+.thankyou-slide strong {
+    color: var(--ex-white) !important;
+}
+
+.thankyou-slide code,
+.thankyou-slide pre {
+    background-color: #1a1a1a !important;
+    border-color: #333333 !important;
+    color: var(--ex-white) !important;
+    text-align: left;
+}
+
+/* ── Exxeta footer bar ───────────────────────────────────── */
+.exxeta-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+    background-color: transparent;
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+    z-index: 100;
+    gap: 0.6rem;
+}
+
+/* Footer on black slides (title, thank-you) */
+.exxeta-footer--dark {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.exxeta-footer__mark {
+    height: 0.9rem;
+    width: auto;
+    opacity: 0.85;
+}
+
+.exxeta-footer__mark--invert {
+    filter: invert(1) brightness(0.25);
+}
+
+.exxeta-footer__label {
+    flex: 1;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--ex-mid);
+    text-transform: uppercase;
+}
+
+.exxeta-footer__page {
+    font-size: 0.65rem;
+    color: var(--ex-mid);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Footer label/page on dark slides */
+.exxeta-footer--dark .exxeta-footer__label,
+.exxeta-footer--dark .exxeta-footer__page {
+    color: #666666;
+}
