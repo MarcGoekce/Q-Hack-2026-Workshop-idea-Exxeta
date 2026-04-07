@@ -1,0 +1,9 @@
+{
+  "id": "opencode-demo",
+  "name": "OpenCode Demo",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Demo: Agentic coding with OpenCode in Obsidian",
+  "author": "Workshop Demo",
+  "isDesktopOnly": true
+}

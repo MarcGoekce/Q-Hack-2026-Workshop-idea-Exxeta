@@ -1,0 +1,21 @@
+PLACEHOLDER — demo1-run1.cast
+
+This file should be replaced with a real asciinema recording.
+
+To reproduce:
+  cd demo-repo/obsidian-plugin
+  asciinema rec demo1-run1.cast
+
+Inside the recording, follow: rehearsals/rehearsal-1-obsidian.md — Run 1 (Full Live Flow)
+
+Expected duration: ~8 minutes
+Expected content:
+  - Reset to checkpoint-1
+  - Run opencode
+  - Prompt: @coder Add a "Generate Note" command...
+  - Approve the edit
+  - Switch to checkpoint-2 (opencode.json)
+  - Switch to Obsidian and demonstrate command palette
+
+Upload when ready:
+  asciinema upload demo1-run1.cast

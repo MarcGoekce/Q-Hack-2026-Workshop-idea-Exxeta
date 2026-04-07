@@ -1,0 +1,39 @@
+OpenCode v0.3.1 — plan mode
+Model: anthropic/claude-sonnet-4-5
+Working directory: /demo-repo/cli-fallback/sample-repo
+
+> Scanning project files...
+  Found: src/calculator.ts, src/index.ts, package.json, tsconfig.json
+
+> Reading src/calculator.ts (23 lines)
+
+> Analysis complete. Proposed plan:
+
+  ┌─ ISSUE FOUND ──────────────────────────────────────────────────────────┐
+  │                                                                        │
+  │  File: src/calculator.ts                                               │
+  │  Line: 21                                                              │
+  │  Severity: BUG — incorrect operator                                   │
+  │                                                                        │
+  │  The `divide` function uses multiplication (*) instead of division (/). │
+  │                                                                        │
+  │  Current:                                                              │
+  │    export function divide(a: number, b: number): number {             │
+  │      return a * b;  // BUG: should be a / b                          │
+  │    }                                                                   │
+  │                                                                        │
+  │  Proposed fix:                                                         │
+  │    export function divide(a: number, b: number): number {             │
+  │      return a / b;                                                     │
+  │    }                                                                   │
+  │                                                                        │
+  │  Additional note: consider adding a guard for b === 0 to avoid        │
+  │  division-by-zero (returns Infinity in JS/TS without it).             │
+  └────────────────────────────────────────────────────────────────────────┘
+
+  No other issues found.
+  1 file would be modified: src/calculator.ts
+
+  [Plan complete — run without --plan to apply]
+
+Elapsed: 3.2s | Tokens: 412 in / 187 out

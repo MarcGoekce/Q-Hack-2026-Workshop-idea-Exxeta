@@ -1,0 +1,27 @@
+OpenCode v0.3.1 — agent answer
+Model: anthropic/claude-sonnet-4-5
+Prompt: "What does src/calculator.ts do? Any issues?"
+
+─────────────────────────────────────────────────────────────────────────────
+
+This file exports four arithmetic functions:
+
+  • add(a, b)      → returns a + b  ✓
+  • subtract(a, b) → returns a - b  ✓
+  • multiply(a, b) → returns a * b  ✓
+  • divide(a, b)   → returns a * b  ✗  ← BUG
+
+**Issue found**: `divide()` is implemented as multiplication.
+On line 21, `return a * b` should be `return a / b`.
+
+This would cause silent incorrect results — no runtime error, just wrong
+output. For example: divide(10, 5) returns 50 instead of 2.
+
+I'd also recommend adding a zero-division guard:
+
+  if (b === 0) throw new Error("Cannot divide by zero");
+
+Would you like me to apply these fixes? (permission: edit = ask)
+
+─────────────────────────────────────────────────────────────────────────────
+Elapsed: 4.1s | Tokens: 389 in / 241 out

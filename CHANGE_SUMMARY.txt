@@ -1,0 +1,151 @@
+CHANGE SUMMARY — Task C: Demo Scaffolding, Checkpoints, Rehearsal Transcripts, Final Checklists
+Generated: 2026-04-02
+Sub-Lead: OpenCode (claude-sonnet-4.6)
+
+═══════════════════════════════════════════════════════════════════════════════
+1. WHAT WAS BUILT
+═══════════════════════════════════════════════════════════════════════════════
+
+Obsidian Plugin Scaffold (demo-repo/obsidian-plugin/)
+  manifest.json              Plugin metadata (id: opencode-demo)
+  main.ts                    Full plugin: 2 commands, modal, settings tab, offline fallback
+  styles.css                 Plugin styles using Obsidian CSS variables
+  opencode.json              MCP server config + permission rules
+  .opencode/AGENTS.md        Project-level agent scope rules
+  .opencode/agents/coder.md  Per-agent config (mode: build, model: claude-sonnet-4-5)
+  README.md                  Usage, offline fallback, checkpoint guide, project structure
+  checkpoint-1/              Initial state: manifest.json + 5-line empty plugin stub
+    manifest.json
+    main.ts
+  checkpoint-2/              MCP wired: opencode.json added, single command implemented
+    manifest.json
+    main.ts
+    opencode.json
+
+CLI Fallback (demo-repo/cli-fallback/)
+  sample-repo/src/
+    calculator.ts            TS calculator with intentional bug (divide uses * not /)
+    index.ts                 Entry point that calls all 4 functions
+  sample-repo/
+    package.json             npm config (ts-node, typescript)
+    tsconfig.json            TS config targeting ES2020
+  opencode.json              Permission config (bash: ask, edit: ask, read: allow)
+  run-demo.sh                Scripted demo runner; --live flag for real opencode
+  mock-responses/
+    plan-output.txt          Realistic opencode plan output (bug found, fix proposed)
+    agent-answer.txt         Realistic agent response to "what does this code do?"
+  README.md                  Live vs mock usage, checkpoint guide, expected output
+  checkpoint-1/              sample-repo only, no opencode.json
+  checkpoint-2/              + opencode.json, bug still present
+  checkpoint-3/              + fix applied (divide uses /, zero-division guard added)
+
+Rehearsal Transcripts (demo-repo/rehearsals/)
+  rehearsal-1-obsidian.md    Two full runs: live (~8 min) + mocked (~5.5 min)
+                             Exact commands, timing marks, what to say while waiting,
+                             recovery table
+  rehearsal-2-cli.md         Two full runs: live (~8.5 min) + mocked (~6.5 min)
+                             Same format; diff commands, permission prompt walkthrough
+  rehearsal-notes.md         Timing targets, known issues, "if this fails do this" map,
+                             pre-demo 30-minute checklist, audience pacing notes
+  RECORDING_GUIDE.md         asciinema, OBS Studio, vhs instructions; compression/sharing
+
+Placeholder Recordings (demo-repo/rehearsals/)
+  demo1-run1.cast.placeholder  Reproduction instructions for live Obsidian recording
+  demo1-run2.cast.placeholder  Reproduction instructions for mock Obsidian recording
+  demo2-run1.cast.placeholder  Reproduction instructions for live CLI recording
+  demo2-run2.cast.placeholder  Reproduction instructions for mock CLI recording
+
+Final Checklist (docs/)
+  RELEASE_CHECKLIST.md       Pre-workshop, during, and post-workshop checklists
+                             (~30 items across slides, demo 1, demo 2, OpenCode setup,
+                             presenter machine)
+
+═══════════════════════════════════════════════════════════════════════════════
+2. KEY DECISIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+a) main.ts exceeds 80 lines (~115 lines)
+   Reason: The spec called for settings tab (PluginSettingTab) which requires
+   its own class, plus two command handlers, plus the offline fallback in each.
+   Splitting into two files would require a build step; single file is simpler
+   for a demo. checkpoint-2/main.ts is kept under 50 lines as a "before" state.
+
+b) Mock responses are written as realistic terminal output
+   The plan-output.txt and agent-answer.txt reproduce OpenCode's actual output
+   format (version line, model line, boxed plan, token counts). This makes the
+   mock mode feel authentic rather than obviously fake.
+
+c) checkpoint-3 shows agent improvement beyond the prompt
+   The fixed calculator.ts adds a zero-division guard that wasn't asked for.
+   This is intentional — it demonstrates "the agent going slightly beyond the
+   brief" which is a talking point in rehearsal-2-cli.md.
+
+d) run-demo.sh uses `grep` for display (not cat + full file)
+   Only shows the relevant divide() block in Step 1 to keep terminal output
+   focused. Full file shown via cat in later steps.
+
+e) CLI fallback opencode.json uses permission strings not objects
+   The spec showed `"bash": "ask"` (string) not `"bash": { "*": "ask" }` (object).
+   This matches the simpler permission form valid in OpenCode config.
+
+═══════════════════════════════════════════════════════════════════════════════
+3. AUTHORITATIVE SOURCES
+═══════════════════════════════════════════════════════════════════════════════
+
+- OpenCode config schema: https://opencode.ai/config.json (referenced in opencode.json $schema)
+- Obsidian Plugin API: Plugin, Modal, Notice, Setting, requestUrl — standard Obsidian API types
+- Task A outputs: docs/TALK_TRACK.md, README.md (used for context on demo narrative)
+- asciinema docs: https://asciinema.org/docs (referenced in RECORDING_GUIDE.md)
+- OBS Studio: https://obsproject.com/ (referenced in RECORDING_GUIDE.md)
+- vhs (charmbracelet): https://github.com/charmbracelet/vhs (referenced in RECORDING_GUIDE.md)
+
+═══════════════════════════════════════════════════════════════════════════════
+4. COMMANDS TO REPRODUCE LOCALLY
+═══════════════════════════════════════════════════════════════════════════════
+
+# Test mock CLI demo (no dependencies required)
+cd /home/mago2/OneDrive/Exxeta/Q-Summit/workshop-agentic/demo-repo/cli-fallback
+chmod +x run-demo.sh
+./run-demo.sh
+
+# Verify checkpoint diffs
+diff obsidian-plugin/checkpoint-1/main.ts obsidian-plugin/checkpoint-2/main.ts
+diff cli-fallback/checkpoint-2/sample-repo/src/calculator.ts \
+     cli-fallback/checkpoint-3/sample-repo/src/calculator.ts
+
+# View full structure
+find /home/mago2/OneDrive/Exxeta/Q-Summit/workshop-agentic/demo-repo -type f | sort
+
+# Build Obsidian plugin (requires Node.js)
+cd /home/mago2/OneDrive/Exxeta/Q-Summit/workshop-agentic/demo-repo/obsidian-plugin
+npm install  # (no package.json yet — see blockers below)
+npm run build
+
+═══════════════════════════════════════════════════════════════════════════════
+5. OPEN BLOCKERS
+═══════════════════════════════════════════════════════════════════════════════
+
+a) obsidian-plugin/package.json not created
+   A real Obsidian plugin build requires package.json with obsidian, esbuild,
+   and typescript dev dependencies, plus an esbuild config. These were not
+   specified in the task brief and were omitted to keep the scaffold minimal.
+   ACTION: @dev to add package.json + esbuild.config.mjs if a buildable plugin
+   is required (not just a readable demo).
+
+b) mcp-server/index.js not created
+   opencode.json references "command": ["node", "mcp-server/index.js"] but no
+   MCP server implementation exists. The demo works without it (offline fallback).
+   ACTION: @dev to stub a minimal MCP server if live MCP demo is required.
+
+c) .cast.placeholder files are not real recordings
+   All four rehearsal recordings are placeholders. They contain reproduction
+   instructions but no actual recorded sessions.
+   ACTION: Presenter to record using asciinema before the workshop.
+
+d) docs/handout.pdf not generated
+   RELEASE_CHECKLIST.md references this file but Task B (slides) generates it.
+   ACTION: @dev/@qa to confirm slidev PDF export works and place at docs/handout.pdf.
+
+e) slides/ package.json not verified
+   RELEASE_CHECKLIST.md checks "npm install in slides/" — this assumes a Slidev
+   project exists there. If Task A/B did not create it, this item is N/A.

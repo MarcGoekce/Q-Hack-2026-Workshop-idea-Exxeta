@@ -1,0 +1,23 @@
+PLACEHOLDER — demo2-run1.cast
+
+This file should be replaced with a real asciinema recording.
+
+To reproduce:
+  cd demo-repo/cli-fallback
+  asciinema rec demo2-run1.cast
+
+Inside the recording, follow: rehearsals/rehearsal-2-cli.md — Run 1 (Full Live Flow)
+
+Expected duration: ~8-9 minutes
+Expected content:
+  - cp -r checkpoint-2/. .
+  - cat sample-repo/src/calculator.ts
+  - opencode run --plan "Find and fix any bugs in src/calculator.ts"
+  - opencode run "What does src/calculator.ts do? Any issues?"
+  - opencode run "Fix the bug in divide() — it should divide, not multiply"
+  - Approve edit permission prompt
+  - cat sample-repo/src/calculator.ts (after fix)
+  - diff checkpoint-2/sample-repo/src/calculator.ts checkpoint-3/sample-repo/src/calculator.ts
+
+Upload when ready:
+  asciinema upload demo2-run1.cast

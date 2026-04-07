@@ -1,0 +1,16 @@
+{
+  "name": "workshop-agentic-slides",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export slides.md --format pdf --output ../docs/handout.pdf --with-clicks false",
+    "validate": "node tools/validate_slidev.js"
+  },
+  "devDependencies": {
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "latest"
+  }
+}

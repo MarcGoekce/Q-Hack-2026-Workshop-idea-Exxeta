@@ -1,0 +1,20 @@
+PLACEHOLDER — demo1-run2.cast
+
+This file should be replaced with a real asciinema recording.
+
+To reproduce:
+  cd demo-repo/obsidian-plugin
+  asciinema rec demo1-run2.cast
+
+Inside the recording, follow: rehearsals/rehearsal-1-obsidian.md — Run 2 (Mocked / Offline Flow)
+
+Expected duration: ~5-6 minutes
+Expected content:
+  - ls -la obsidian-plugin/
+  - cat checkpoint-1/main.ts
+  - cat main.ts
+  - cat .opencode/agents/coder.md
+  - cat checkpoint-2/opencode.json
+
+Upload when ready:
+  asciinema upload demo1-run2.cast

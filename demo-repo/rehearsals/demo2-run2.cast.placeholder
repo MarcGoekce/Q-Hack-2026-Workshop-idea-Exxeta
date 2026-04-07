@@ -1,0 +1,22 @@
+PLACEHOLDER — demo2-run2.cast
+
+This file should be replaced with a real asciinema recording.
+
+To reproduce:
+  cd demo-repo/cli-fallback
+  asciinema rec demo2-run2.cast
+
+Inside the recording, follow: rehearsals/rehearsal-2-cli.md — Run 2 (Mocked / Offline Flow)
+
+Expected duration: ~6-7 minutes
+Expected content:
+  - ./run-demo.sh    (mock mode — no --live flag)
+  - Follow all three pause prompts
+  - cat mock-responses/plan-output.txt
+  - diff checkpoint-2/sample-repo/src/calculator.ts checkpoint-3/sample-repo/src/calculator.ts
+  - cat opencode.json
+
+No opencode installation required. Safe to record on any machine.
+
+Upload when ready:
+  asciinema upload demo2-run2.cast
