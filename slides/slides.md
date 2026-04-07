@@ -49,20 +49,47 @@ Here's our roadmap. We'll move from theory to hands-on demos in the middle secti
 layout: default
 ---
 
+# Current standing
+
+
+<div class="grid grid-cols-2 gap-8 my-20">
+  <div class="flex flex-col items-center gap-4">
+    <img src="/github.svg" class="w-16" />
+    <img src="/github-text.svg" class="w-30" />
+  </div>
+  <div class="flex flex-col items-center gap-4">
+    <img src="/claude-color.svg" class="w-16" />
+    <img src="/claude-text.svg" class="w-30" />
+  </div>
+</div>
+
+- Big enterprise solutions: Copilot / Claude
+- They are agentic tools to work with LLM models in a smart and complex way
+- It just works™
+- Not open source → proprietary models
+- Not flexible, if you want them to be. #Apple
+
+<!-- Speaker note: These tools are powerful but proprietary — OpenCode offers similar agentic power with open configs and permissions. -->
+
+---
+layout: default
+---
+
 # What is Agentic Coding?
 
 Traditional coding assistants → **autocomplete / chat**
 
-Agentic coding → **plan → act → observe → repeat**
+Agentic coding → **plan → act\* → observe → repeat**
 
 <br/>
 
-The key differences:
+The key differences is the **Act** phase:
 
 - **Autonomous multi-step execution** — the agent decides the next action
 - **Tool use** — reads files, runs bash, searches the web
 - **Feedback loops** — observes output and self-corrects
 - **Configurable trust boundaries** — you decide what's auto-approved
+- **Delegate work to further agents** – offload the tasks to spezialized agents
 
 <br/>
 
@@ -76,18 +103,59 @@ The shift is from suggestion-on-demand to autonomous task completion. An agent d
 layout: default
 ---
 
-# OpenCode — What It Is
+# What Is an Agent?
 
-**OpenCode** is an open-source AI coding agent built for the terminal.
+An AI agent receives a goal, proposes a plan of steps, executes permitted tools, observes results, and iterates — subject to permissions and human oversight.
+
+<br/>
+
+<img src="/agent-loop.svg" class="max-h-[40vh] w-auto object-contain mx-auto" />
+
+<br>
+
+> ⚠️ Agents can still produce incorrect results — human review remains essential.
+
+<!-- Speaker note: Keep this high-level; emphasise the need for human review and permissions before any autonomous execution. -->
+
+---
+layout: default
+---
+
+# Why Multiple Agents?
+
+One agent with a broad scope often compromises. Multiple scoped agents give better safety, modularity, and parallelism.
+
+| Single Agent                           | Multi-Agent (scoped)          |
+| -------------------------------------- | ----------------------------- |
+| One context, one role, all permissions | Each agent has a narrow scope |
+| Generalist reasoning                   | Specialist prompts & scopes   |
+| One trust boundary for everything      | Least-privilege per role      |
+
+<br/>
+
+**Example team:** @lead orchestrates → @analyst researches → @dev codes → @critic challenges → @qa validates
+
+> ⚠️ "Specialist" means different prompts and permission scopes, not autonomous judgment — keep humans in the loop.
+
+<!-- Speaker note: Mention that 'specialist' means different prompts/permissions, not different AI brains; always validate outputs with human oversight. -->
+
+---
+layout: default
+---
+
+# OpenCode
+
+**OpenCode** is an open-source agent orchestrations tool built for the terminal.
 
 ```bash
 # Install
 curl -fsSL https://opencode.ai/install | bash
 # or
 npm install -g opencode-ai
-
+```
+```bash
 # Run in your project
-cd my-project && opencode
+opencode
 ```
 
 - Open-source (GitHub: anomalyco/opencode)
@@ -169,18 +237,12 @@ layout: default
 | Tool | Purpose |
 |------|---------|
 | `bash` | Run shell commands (`npm install`, `git status`) |
-| `read` | Read file contents (line-range aware) |
-| `edit` | Exact string replacement in files |
-| `write` | Create or overwrite files |
-| `glob` | Find files by pattern (`**/*.ts`) |
-| `grep` | Regex search across codebase (uses ripgrep) |
-| `list` | List directory contents |
-| `apply_patch` | Apply unified diffs |
+| `read write edit` | Read and manipulate file contents (line-range aware) |
 | `skill` | Load a `SKILL.md` instruction set |
 | `todowrite` | Manage task lists in-session |
-| `webfetch` | Fetch & read a URL |
-| `websearch` | Web search via Exa AI |
+| `delegate` | Delegates a task to a subagent and reads the response |
 | `question` | Ask user for input mid-task |
+| `tool_use` | Reads and uses MCP tool commands from active servers |
 | `lsp` | Go-to-definition, find-references (experimental) |
 
 <!-- Notes:
@@ -317,12 +379,9 @@ layout: default
     },
     "read": {
       "*": "allow",
-      "*.env": "deny",
       "*.env.*": "deny",
       "*.env.example": "allow"
-    }
-  }
-}
+(…)
 ```
 
 > Rules evaluated **last-match-wins**. Put `"*"` first, specifics after.
@@ -335,35 +394,59 @@ This is a real-world config. We start with "ask everything", then carve out safe
 layout: default
 ---
 
+# Configuring your agent team
+
+Before agents can collaborate effectively, you need to tell them who they are and what they're allowed to do.
+
+- **What this section covers:** AGENTS.md, agent files, permissions
+- **Why it matters:** configuration is how you enforce roles, scope, and safety boundaries
+
+---
+layout: default
+---
+
 # AGENTS.md — Project Rules
 
-Two types of rule files:
+Rule files injected as plain text into every agent session's system prompt:
 
-| File | Scope | Purpose |
-|------|-------|---------|
-| `AGENTS.md` (project root) | This repo | Architecture, commands, conventions |
-| `~/.config/opencode/AGENTS.md` | All sessions | Personal preferences |
+| File                         | When active                             | Best for                                    |
+| ---------------------------- | --------------------------------------- | ------------------------------------------- |
+| `AGENTS.md` in project root    | Sessions in that directory (or subdirs) | Build commands, architecture, conventions   |
+| `~/.config/opencode/AGENTS.md` | Every session, all projects             | Personal preferences (not committed to Git) |
+
+Both files are **combined** — project rules stack on top of global rules.
 
 <br/>
 
-Initialized via `/init` — OpenCode scans your repo and generates it.
+**Bootstrap with `/init`** — scans your repo, may ask clarifying questions, then creates *or improves* an existing `AGENTS.md` in place. [Learn more: /init docs](https://opencode.ai/docs/rules#initialize)
+
+---
+layout: default
+---
+
+# AGENTS.md — Project Rules
 
 ```markdown
-# My Project
+# Obsidian Plugin Demo
 
-## Build Commands
-- `npm run build` — full build
-- `npm test` — test suite
+## Off-limits
+- Do not modify `manifest.json` version field during demos
+- Do not run `npm publish`
 
-## Conventions
-- Use TypeScript strict mode
-- All API calls go through `src/api/client.ts`
+## Available Agents
+- **@coder** — TypeScript / Obsidian API specialist
 ```
 
-> Commit `AGENTS.md` to Git — it's shared team knowledge.
+_Example from this workshop's own `.opencode/AGENTS.md`_
+
+> Commit `AGENTS.md` to Git — it's shared team knowledge, not personal config.
+
+<br/>
+
+> ⚠️ AGENTS.md is plain text — agents follow it as instructions, not as enforced rules. Permissions in `opencode.json` are the true enforcement layer.
 
 <!-- Notes:
-AGENTS.md is the project's instruction manual for AI agents. It's not magic — it's just text injected into every session's system prompt. The `/init` command bootstraps it by analyzing your codebase. Think of it like an onboarding doc that every agent reads before touching your code.
+AGENTS.md is the project's instruction manual for AI agents. It's just text injected into every session's system prompt — no magic. The /init command bootstraps it by analyzing your codebase; if one already exists it improves it in place. Both project and global files are combined into the same context. The example here is from the actual demo repo in this workshop. Remind attendees: AGENTS.md guides behavior; opencode.json permissions enforce it. Keep AGENTS.md focused — the whole file is loaded every session.
 -->
 
 ---
@@ -385,13 +468,10 @@ temperature: 0.1
 permission:
   edit: deny
   bash:
-    "*": ask
     "git diff": allow
-    "git log*": allow
     "grep *": allow
   webfetch: deny
 ---
-
 You are a code reviewer. Focus on:
 - Security and input validation
 - Performance implications
@@ -462,37 +542,16 @@ You override built-in agents by name in config. The `permission.task` option let
 layout: default
 ---
 
-# Skills — Reusable Instruction Sets
+# What you'll build
 
-Skills are named `SKILL.md` files loaded on-demand by agents.
+In the next two demos you'll go from zero to a working agentic workflow.
 
-```
-.opencode/skills/git-release/SKILL.md
-~/.config/opencode/skills/deploy-checklist/SKILL.md
-```
+- **Goal:** scaffold and analyze real code with OpenCode — no manual edits
+- **Step 1:** Use Plan mode to review an architecture before touching files
+- **Step 2:** Switch to Build mode and watch the agent execute the plan
+- **Step 3:** Run a non-interactive analysis pass suitable for CI pipelines
 
-```markdown
----
-name: git-release
-description: Create consistent releases and changelogs
-license: MIT
-compatibility: opencode
----
-
-## What I do
-- Draft release notes from merged PRs
-- Propose a version bump
-- Provide a copy-pasteable `gh release create` command
-
-## When to use me
-Use when preparing a tagged release.
-```
-
-Agent sees available skills in tool description → loads on demand via `skill({ name: "git-release" })`
-
-<!-- Notes:
-Skills solve the "system prompt bloat" problem. Instead of putting every workflow into AGENTS.md, you write a SKILL.md. The agent sees a list of available skills and loads the full content only when relevant. Skills can be permissioned — `deny` hides them from the agent entirely, `ask` prompts before loading.
--->
+**Expected outcome:** a scaffolded Obsidian plugin and a structured refactoring report, produced entirely by the agent under your permission rules.
 
 ---
 layout: default
@@ -610,6 +669,42 @@ Real-world CI pattern:
 
 <!-- Notes:
 The non-interactive mode is where OpenCode shines for automation. You can pipe its output, use it in GitHub Actions, run scheduled analysis. The key is always using --agent plan or a custom deny-all agent in CI — never let an automated pipeline run with full build permissions.
+-->
+
+---
+layout: default
+---
+
+# Skills — Reusable Instruction Sets
+
+Skills are named `SKILL.md` files loaded on-demand by agents.
+
+```
+.opencode/skills/git-release/SKILL.md
+~/.config/opencode/skills/deploy-checklist/SKILL.md
+```
+
+```markdown
+---
+name: git-release
+description: Create consistent releases and changelogs
+license: MIT
+compatibility: opencode
+---
+
+## What I do
+- Draft release notes from merged PRs
+- Propose a version bump
+- Provide a copy-pasteable `gh release create` command
+
+## When to use me
+Use when preparing a tagged release.
+```
+
+Agent sees available skills in tool description → loads on demand via `skill({ name: "git-release" })`
+
+<!-- Notes:
+Skills solve the "system prompt bloat" problem. Instead of putting every workflow into AGENTS.md, you write a SKILL.md. The agent sees a list of available skills and loads the full content only when relevant. Skills can be permissioned — `deny` hides them from the agent entirely, `ask` prompts before loading.
 -->
 
 ---
