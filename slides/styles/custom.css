@@ -1,0 +1,182 @@
+/* ---------------------------
+  1) Fonts - Brandstein (new) & Sen
+  Place your WOFF2/WOFF files in /public/fonts/ and update paths if different.
+---------------------------*/
+
+/* Brandstein: regular + bold (adjust filenames if yours differ) */
+@font-face {
+  font-family: "Brandstein";
+  src: local("Brandstein"), local("Brandstein-Regular"),
+       url("/fonts/Brandstein-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Brandstein";
+  src: local("Brandstein-Bold"), local("Brandstein-Bold"),
+       url("/fonts/Brandstein-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sen: regular (add more weights if you have them) */
+@font-face {
+  font-family: "Sen";
+  src: local("Sen"), local("Sen-Regular"),
+       url("/fonts/Sen-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------
+  2) Global font variables for Slidev
+  - H1/hero -> Brandstein
+  - Base -> Sen
+  - Mono -> system monospace
+---------------------------*/
+:root {
+  --vp-font-family-base: "Sen", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --vp-font-family-heading: "Brandstein", var(--vp-font-family-base);
+  --vp-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* ensure slidev code vars point to monospace */
+  --slidev-code-font-family: var(--vp-font-family-mono);
+  --prism-font-family: var(--slidev-code-font-family);
+}
+
+/* Use Sen as the default for the app */
+html, body, #app, #page-root {
+  font-family: var(--vp-font-family-base);
+}
+
+/* H1 / hero titles -> Brandstein */
+h1, .title-slide__title, .slidev-layout h1, .hero-title {
+  font-family: var(--vp-font-family-heading);
+  /* tweak weight and spacing as you need */
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+/* Keep smaller headings / text as Sen */
+h2, h3, h4, h5, h6, p, li {
+  font-family: var(--vp-font-family-base);
+}
+
+/* ---------------------------
+  3) Code blocks & inline code: force monospace (not Sen)
+---------------------------*/
+code, kbd, samp, pre,
+div[class*="language-"],
+pre[class*="language-"],
+code[class*="language-"],
+.slidev-layout code,
+.slidev-code {
+  font-family: var(--vp-font-family-mono) !important;
+  /* optional: keep size / line-height sensible */
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* Prism / two-slash fallbacks */
+:root {
+  --twoslash-code-font: var(--vp-font-family-mono);
+  --twoslash-code-font-size: 1em;
+}
+
+/* Ensure inline code doesn't inherit Sen via cascade */
+p code, li code, strong code, em code {
+  font-family: var(--vp-font-family-mono) !important;
+}
+
+/* ---------------------------
+  4) Landing / Thank-you hero style
+  Use class="landing-hero" on your landing slide, and class="thank-you landing-hero" on the thank-you slide.
+---------------------------*/
+.landing-hero,
+.thank-you.landing-hero {
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(3rem, 8vw, 6rem) 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Hero title sizing */
+.landing-hero h1, .thank-you.landing-hero h1 {
+  font-family: var(--vp-font-family-heading);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+}
+
+/* Subtitles / badge adjustments in hero */
+.landing-hero .title-slide__badge,
+.thank-you.landing-hero .title-slide__badge {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+/* If your title slide uses .title-slide__mark for the mark image */
+.landing-hero .title-slide__mark img,
+.thank-you.landing-hero .title-slide__mark img {
+  filter: none;
+  margin-top: 1rem;
+}
+
+/* ---------------------------
+  5) Footer logo: invert on dark theme
+  - Preferred approach: add class "invert-on-dark" to your logo <img> in the footer.
+  e.g. <img src="/exxeta-logo-black.svg" class="h-10 invert-on-dark" ...>
+---------------------------*/
+.invert-on-dark {
+  transition: filter 180ms ease, opacity 180ms ease;
+  /* ensure initial looks normal in light */
+  filter: none;
+}
+
+/* Slidev dark theme variants — cover several possible selectors Slidev may use */
+.theme-dark .invert-on-dark,
+.slidev-theme--dark .invert-on-dark,
+[data-theme="dark"] .invert-on-dark {
+  /* invert black -> white. If your logo is pure black this will produce white.
+     tweak brightness/contrast if necessary. */
+  filter: invert(1) brightness(1.05);
+}
+
+/* ensure in light theme we don't accidentally invert */
+.theme-light .invert-on-dark,
+.slidev-theme--light .invert-on-dark,
+[data-theme="light"] .invert-on-dark {
+  filter: none;
+}
+
+/* Optionally target the footer-specific selector Slidev uses */
+.slidev-footer .invert-on-dark {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---------------------------
+  6) Small cosmetic tweaks (optional)
+---------------------------*/
+.title-slide__badge span { letter-spacing: 0.02em; }
+
+/* Quick usage notes:
+ - Put the font files in /public/fonts/ (or other static folder) and ensure the URL paths in @font-face match.
+ - Replace Brandstein/Sen font files with your actual filenames if they differ.
+ - Add class="landing-hero" / class="thank-you landing-hero" to slides in slide frontmatter as needed.
+ - For the footer logo add class="invert-on-dark" to the <img>.
+*/
+
